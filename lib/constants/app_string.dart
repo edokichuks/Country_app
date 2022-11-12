@@ -3,4 +3,5 @@ class AppString {
 
   AppString._();
   static const String explore = 'Explore';
+  static const String searchCountry = 'Search Country';
 }
