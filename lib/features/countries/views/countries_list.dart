@@ -1,14 +1,26 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hng_task3/constants/app_color.dart';
 import 'package:hng_task3/constants/app_string.dart';
 import 'package:hng_task3/constants/app_textstyle.dart';
+import 'package:hng_task3/features/countries/models/country/country.dart';
+import 'package:hng_task3/features/countries/notifiers/countries_notifiers.dart';
 import 'package:hng_task3/services/countries_data_services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Countries extends StatelessWidget {
+class Countries extends ConsumerStatefulWidget {
   const Countries({Key? key}) : super(key: key);
 
   @override
+  ConsumerState<Countries> createState() => _CountriesState();
+}
+
+class _CountriesState extends ConsumerState<Countries> {
+  @override
   Widget build(BuildContext context) {
+    final countryList = ref.watch(countriesDataServiceProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text.rich(
@@ -25,15 +37,24 @@ class Countries extends StatelessWidget {
         ),
         elevation: 0,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.dark_mode_outlined),
-            onPressed: () {},
+          Container(
+            decoration: BoxDecoration(
+                color: AppColor.textColor.withOpacity(0.4),
+                shape: BoxShape.circle),
+            child: IconButton(
+              icon: const Icon(Icons.dark_mode_outlined),
+              onPressed: () {},
+            ),
           )
         ],
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 5,
+          ),
           TextFormField(
+            textAlign: TextAlign.center,
             decoration: InputDecoration(
               hintText: AppString.searchCountry,
               hintStyle: TextStyle(
@@ -41,29 +62,51 @@ class Countries extends StatelessWidget {
               ),
               filled: true,
               fillColor: Colors.blueGrey.shade100.withOpacity(0.4),
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search,
               ),
             ),
           ),
-          Text('test'),
-          TextButton(
-              onPressed: () async {
-                await CountriesDataService().countryList();
-              },
-              child: Text('Test')),
-          ListTile(
-            leading: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), color: Colors.red
-                  // image: DecorationImage(image: NetworkImage(''))
-                  ),
-              child: Text('A'),
-            ),
-            title: Text('Nigeria'),
-            subtitle: Text('Abuja'),
+          Expanded(
+            child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              AsyncValue<List<Country>> countryList =
+                  ref.watch(countriesListProvider);
+              return countryList.when(
+                  data: (data) {
+                    return ListView.builder(
+                        itemCount: data.length,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final singleCountry = data[index];
+                          return ListTile(
+                            leading: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColor.transperent,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    singleCountry.flags!.png ?? AppString.flag,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            title: Text(singleCountry.name!.common ??
+                                AppString.country),
+                            subtitle: Text(
+                              singleCountry.capital != null
+                                  ? singleCountry.capital!.join('')
+                                  : singleCountry.capital.toString() 
+                            ),
+                          );
+                        });
+                  },
+                  error: (error, stack) => Text('ERROR'),
+                  loading: () => CircularProgressIndicator());
+            }),
           )
         ],
       ),

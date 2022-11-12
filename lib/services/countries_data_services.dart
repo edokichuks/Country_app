@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:hng_task3/constants/app_api_constant.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../features/countries/models/country/country.dart';
@@ -15,16 +16,15 @@ class CountriesDataService {
     return response;
   }
 
-  Future countryList() async {
+  Future<List<Country>> countryList() async {
     try {
       log('Attemping to get countries list');
       final response = await _get(uri: AppApiData.baseUri('all'));
 
-      
       print('data encoded');
       List<Country> data = List<Country>.from(
           jsonDecode(response.body).map((x) => Country.fromJson(x))).toList();
-      log(data.toString());
+      log(data.first.toString());
       return data;
     } on SocketException catch (ex, stackTrace) {
       throw Failure(
@@ -38,7 +38,9 @@ class CountriesDataService {
     } on Failure catch (ex, stackTrace) {
       throw Failure(
           message: ex.message,
-          devMessage: 'Error:${ex}, Stacktrace: $stackTrace');
+          devMessage: 'Error:$ex, Stacktrace: $stackTrace');
     }
   }
 }
+
+final countriesDataServiceProvider = Provider((ref) => CountriesDataService());
