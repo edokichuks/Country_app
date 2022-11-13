@@ -20,11 +20,8 @@ class CountriesDataService {
     try {
       log('Attemping to get countries list');
       final response = await _get(uri: AppApiData.baseUri('all'));
-
-      print('data encoded');
       List<Country> data = List<Country>.from(
           jsonDecode(response.body).map((x) => Country.fromJson(x))).toList();
-      log(data.first.toString());
       return data;
     } on SocketException catch (ex, stackTrace) {
       throw Failure(

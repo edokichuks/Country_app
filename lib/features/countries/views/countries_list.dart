@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hng_task3/constants/app_color.dart';
 import 'package:hng_task3/constants/app_string.dart';
 import 'package:hng_task3/constants/app_textstyle.dart';
 import 'package:hng_task3/features/countries/models/country/country.dart';
 import 'package:hng_task3/features/countries/notifiers/countries_notifiers.dart';
-import 'package:hng_task3/services/countries_data_services.dart';
+import 'package:hng_task3/features/countries/views/country_details.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../widgets/app_loading.dart';
@@ -21,7 +20,6 @@ class Countries extends ConsumerStatefulWidget {
 class _CountriesState extends ConsumerState<Countries> {
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: AppBar(
         title: Text.rich(
@@ -81,26 +79,35 @@ class _CountriesState extends ConsumerState<Countries> {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           final singleCountry = data[index];
-                          return ListTile(
-                            leading: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: AppColor.transperent,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    singleCountry.flags!.png ?? AppString.flag,
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return CountryDetails(country: singleCountry);
+                              }));
+                            },
+                            child: ListTile(
+                              leading: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColor.transperent,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      singleCountry.flags!.png ??
+                                          AppString.flag,
+                                    ),
                                   ),
                                 ),
                               ),
+                              title: Text(singleCountry.name!.common ??
+                                  AppString.country),
+                              subtitle: Text(singleCountry.capital != null
+                                  ? singleCountry.capital!.join('')
+                                  : singleCountry.capital.toString()),
                             ),
-                            title: Text(singleCountry.name!.common ??
-                                AppString.country),
-                            subtitle: Text(singleCountry.capital != null
-                                ? singleCountry.capital!.join('')
-                                : singleCountry.capital.toString()),
                           );
                         });
                   },
