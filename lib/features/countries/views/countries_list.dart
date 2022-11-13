@@ -9,6 +9,8 @@ import 'package:hng_task3/features/countries/notifiers/countries_notifiers.dart'
 import 'package:hng_task3/services/countries_data_services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../widgets/app_loading.dart';
+
 class Countries extends ConsumerStatefulWidget {
   const Countries({Key? key}) : super(key: key);
 
@@ -19,8 +21,7 @@ class Countries extends ConsumerStatefulWidget {
 class _CountriesState extends ConsumerState<Countries> {
   @override
   Widget build(BuildContext context) {
-    final countryList = ref.watch(countriesDataServiceProvider);
-
+  
     return Scaffold(
       appBar: AppBar(
         title: Text.rich(
@@ -38,6 +39,7 @@ class _CountriesState extends ConsumerState<Countries> {
         elevation: 0,
         actions: [
           Container(
+            margin: const EdgeInsets.only(right: 10),
             decoration: BoxDecoration(
                 color: AppColor.textColor.withOpacity(0.4),
                 shape: BoxShape.circle),
@@ -96,16 +98,14 @@ class _CountriesState extends ConsumerState<Countries> {
                             ),
                             title: Text(singleCountry.name!.common ??
                                 AppString.country),
-                            subtitle: Text(
-                              singleCountry.capital != null
-                                  ? singleCountry.capital!.join('')
-                                  : singleCountry.capital.toString() 
-                            ),
+                            subtitle: Text(singleCountry.capital != null
+                                ? singleCountry.capital!.join('')
+                                : singleCountry.capital.toString()),
                           );
                         });
                   },
-                  error: (error, stack) => Text('ERROR'),
-                  loading: () => CircularProgressIndicator());
+                  error: (error, stack) => Text(error.toString()),
+                  loading: () => const AppLoading());
             }),
           )
         ],
