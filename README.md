@@ -50,7 +50,7 @@ Features To Further Implement
 
 Challenges Faced
 
-> Deployment of the app to - [Appetizer.io ](https://appetize.io/) : Solved by deploying the debug version of the app
+> Large data from the json file : I had to observe the json data very well to know how to decode the data and consume it.
 
 
 #### App Appetize link
