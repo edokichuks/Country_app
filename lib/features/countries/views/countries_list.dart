@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hng_task3/constants/app_color.dart';
-import 'package:hng_task3/constants/app_string.dart';
-import 'package:hng_task3/constants/app_textstyle.dart';
 import 'package:hng_task3/features/countries/models/country/country.dart';
 import 'package:hng_task3/features/countries/notifiers/countries_notifiers.dart';
 import 'package:hng_task3/features/countries/views/country_details.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../widgets/app_loading.dart';
+import '../../../constants/constants.dart';
+import '../../../widgets/widgets.dart';
 
 class Countries extends ConsumerStatefulWidget {
   const Countries({Key? key}) : super(key: key);
@@ -118,122 +114,17 @@ class _CountriesState extends ConsumerState<Countries> {
               return countryList.when(
                   data: (data) {
                     countryInternalList = data;
-
-
-                    return 
-                    isSearching && searchedCountry.isEmpty?
-                    
-                    Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  height: 100,
-                                ),
-                                Icon(
-                                  Icons.search_off,
-                                  size: 100,
-                                  color: AppColor.mainColor,
-                                ),
-                                Text(
-                                  'No results found',
-                                  style: TextStyle(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColor.mainColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        :
-                        isSearching ?
-                        ListView.builder(
-                        itemCount: searchedCountry.length,
-                        physics: const BouncingScrollPhysics(),
-                        
-                        itemBuilder: (context, index) {
-                          final singleCountry = searchedCountry[index];
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) {
-                                    return CountryDetails(
-                                        country: singleCountry);
-                                  },
-                                ),
-                              );
-                            },
-                            child: ListTile(
-                              leading: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColor.transperent,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      singleCountry.flags!.png ??
-                                          AppString.flag,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              title: Text(singleCountry.name!.common ??
-                                  AppString.country),
-                              subtitle: Text(singleCountry.capital != null
-                                  ? singleCountry.capital!.join('')
-                                  : singleCountry.capital.toString()),
-                            ),
-                          );
-                        }):
-
-                    ListView.builder(
-                        itemCount: data.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final singleCountry = data[index];
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) {
-                                    return CountryDetails(
-                                        country: singleCountry);
-                                  },
-                                ),
-                              );
-                            },
-                            child: ListTile(
-                              leading: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: AppColor.transperent,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      singleCountry.flags!.png ??
-                                          AppString.flag,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              title: Text(singleCountry.name!.common ??
-                                  AppString.country),
-                              subtitle: Text(singleCountry.capital != null
-                                  ? singleCountry.capital!.join('')
-                                  : singleCountry.capital.toString()),
-                            ),
-                          );
-                        });
+                    return isSearching && searchedCountry.isEmpty
+                        ? const SearchNotFound()
+                        : isSearching
+                            ? countryListView(countryData: searchedCountry)
+                            : countryListView(countryData: data);
                   },
-                  error: (error, stack) => Text(error.toString()),
+                  error: (error, stack) => Center(
+                          child: Text(
+                        error.toString(),
+                        style: Theme.of(context).textTheme.bodyText2,
+                      )),
                   loading: () => const AppLoading());
             }),
           )
