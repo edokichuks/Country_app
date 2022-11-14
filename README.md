@@ -1,3 +1,7 @@
+
+
+
+
 ## HNG Mobile-task3
 
 #### Country App
@@ -55,7 +59,7 @@ Challenges Faced
 
 ##### Short video clip
 
-
+https://user-images.githubusercontent.com/92238247/201655404-07d653fc-43be-43aa-abbf-c6c70d240813.mp4
 
 
 
