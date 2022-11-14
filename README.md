@@ -32,9 +32,9 @@ making the app very maintainable and scalable.
 
 App Library Dependence
 
-> url_launcher
+> Shimmer
 
-- [Flutter plugin for launching a URL. ](https://pub.dev/packages/url_launcher)
+- [ A package provides an easy way to add shimmer effect in Flutter project ](https://pub.dev/packages/shimmer)
 
 Features To Further Implement
 > Properly follow MVVM design pattern
