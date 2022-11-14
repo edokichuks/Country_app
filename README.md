@@ -1,7 +1,5 @@
 ## HNG Mobile-task3
 
-Task Solution For HNG Stage 3
-
 #### Country App
 
 App Features
