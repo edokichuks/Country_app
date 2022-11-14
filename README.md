@@ -14,7 +14,7 @@ App Features
 
 App Design
 
-> A single page resume application design worked on by I and Efeosa Asesojia
+> Country list design.
 
 - [Figma Design](https://www.figma.com/proto/v9AXj4VZNnx26fTthrPbhX/Explore?node-id=33%3A1390&scaling=scale-down&page-id=0%3A1&starting-point-node-id=33%3A1390&show-proto-sidebar=1)
 
