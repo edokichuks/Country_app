@@ -22,6 +22,11 @@ class CountriesDataService {
       final response = await _get(uri: AppApiData.baseUri('all'));
       List<Country> data = List<Country>.from(
           jsonDecode(response.body).map((x) => Country.fromJson(x))).toList();
+          data.sort((a, b) {
+        return a.name!.common!.toLowerCase().compareTo(b.name!.common!.toLowerCase());
+
+        ///
+      });
       return data;
     } on SocketException catch (ex, stackTrace) {
       throw Failure(
