@@ -1,16 +1,68 @@
-# hng_task3
+## HNG Mobile-task3
 
-A new Flutter project.
+Task Solution For HNG Stage 3
 
-## Getting Started
+#### Country App
 
-This project is a starting point for a Flutter application.
+App Features
 
-A few resources to get you started if this is your first Flutter project:
+> Countries List
+> 
+> Tap country to get more details.
+> 
+> Filter country results.
+>
+> Dark mode which automatically adapts to system theme.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+App Design
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> A single page resume application design worked on by I and Efeosa Asesojia
+
+- [Figma Design](https://www.figma.com/proto/v9AXj4VZNnx26fTthrPbhX/Explore?node-id=33%3A1390&scaling=scale-down&page-id=0%3A1&starting-point-node-id=33%3A1390&show-proto-sidebar=1)
+
+
+
+App Code Structure
+
+> MVVM design pattern is used in this app 
+and with seperation of concerns 
+making the app very maintainable and scalable.
+
+App Library Dependence
+
+> url_launcher
+
+- [Flutter plugin for launching a URL. ](https://pub.dev/packages/url_launcher)
+
+Features To Further Implement
+> Properly follow MVVM design pattern
+> 
+> Properly refactor the codebase. Singularity of function (seperation of concerns)
+> 
+> Handle localization 
+> 
+
+#### App APK Link
+
+- [Country App ](https://github.com/edokichuks/hng_task3)
+
+Challenges Faced
+
+> Deployment of the app to - [Appetizer.io ](https://appetize.io/) : Solved by deploying the debug version of the app
+
+
+#### App Appetize link
+
+- [Appetize link ](https://appetize.io/app/4yx7ay35gz3qg37htagpwoesua?device=pixel4&osVersion=11.0&scale=75)
+
+##### Short video clip
+
+
+
+
+
+
+
+
+
+
