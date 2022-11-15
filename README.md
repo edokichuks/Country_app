@@ -1,7 +1,3 @@
-
-
-
-
 ## HNG Mobile-task3
 
 #### Country App
@@ -55,13 +51,14 @@ Challenges Faced
 
 #### App Appetize link
 
-- [Appetize link ](https://appetize.io/app/4yx7ay35gz3qg37htagpwoesua?device=pixel4&osVersion=11.0&scale=75)
+- [Appetize link ](https://appetize.io/app/mrkrnl236bjnzsyel2w6plqjne?device=pixel4&osVersion=11.0&scale=75)
 
 ##### Short video clip
 
-https://user-images.githubusercontent.com/92238247/201655404-07d653fc-43be-43aa-abbf-c6c70d240813.mp4
 
 
+
+https://user-images.githubusercontent.com/92238247/201918795-b0b6c442-3352-40e4-8ecd-39af2af2d3d4.mp4
 
 
 
