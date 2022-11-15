@@ -5,7 +5,7 @@ class Failure extends Equatable {
   final String message;
   final String devMessage;
 
-  Failure({
+  const Failure({
     required this.message,
     required this.devMessage,
   });

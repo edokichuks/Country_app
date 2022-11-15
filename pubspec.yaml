@@ -30,6 +30,9 @@ dependencies:
   #A package provides an easy way to add shimmer effect in Flutter project
   shimmer: ^2.0.0
 
+  #A flutter ListView in which list items can be grouped to sections.
+  grouped_list: ^5.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

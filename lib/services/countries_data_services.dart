@@ -25,7 +25,6 @@ class CountriesDataService {
           data.sort((a, b) {
         return a.name!.common!.toLowerCase().compareTo(b.name!.common!.toLowerCase());
 
-        ///
       });
       return data;
     } on SocketException catch (ex, stackTrace) {
@@ -33,7 +32,7 @@ class CountriesDataService {
           message: 'You don\'t have internet connection',
           devMessage: stackTrace.toString());
     } on FormatException {
-      throw Failure(
+      throw const Failure(
         message: 'Username or password is incorrect',
         devMessage: 'Error at formatException',
       );

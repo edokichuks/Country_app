@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hng_task3/features/countries/models/country/country.dart';
 import 'package:hng_task3/features/countries/notifiers/countries_notifiers.dart';
-import 'package:hng_task3/features/countries/views/country_details.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../constants/constants.dart';
 import '../../../widgets/widgets.dart';

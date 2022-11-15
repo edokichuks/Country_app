@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class Gini extends Equatable {
+	// ignore: non_constant_identifier_names
 	final double? L2014;
 
+	// ignore: non_constant_identifier_names
 	const Gini({this.L2014});
 
 	factory Gini.fromJson(Map<String, dynamic> json) => Gini(
